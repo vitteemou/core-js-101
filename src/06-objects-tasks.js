@@ -20,10 +20,16 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
-}
+function Rectangle(width, height) {
+  return {
+    width,
+    height,
 
+    getArea: function getArea() {
+      return width * height;
+    },
+  };
+}
 
 /**
  * Returns the JSON representation of specified object
@@ -35,8 +41,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -139,6 +145,65 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 };
+
+/* const cssSelectorBuilder = {
+  value,
+
+  Selector(value) {
+    this.value = value ? value : '';
+  },
+
+  element(value) {
+    return new Selector(value);
+  },
+
+  id(value) {
+
+    return new Selector(value);
+    this.val += `#${value}`;
+    return this;
+  },
+
+  class(value) {
+    this.val += `.${value}`;
+    return this;
+  },
+
+  attr(value) {
+    this.val += `[${value}]`;
+    return this;
+  },
+
+  pseudoClass(value) {
+    this.val += `:${value}`;
+    return this;
+  },
+
+  pseudoElement(value) {
+    this.val += `::${value}`;
+    return this;
+  },
+
+  combine(selector1, combinator, selector2) {
+    const selectorStr1 = selector1.stringify();
+    const selectorStr2 = selector2.stringify();
+
+    this.val = `${selectorStr1} ${combinator} ${selectorStr2}`;
+    return this;
+  },
+
+  stringify() {
+    const oldVal = this.val;
+    this.val = '';
+    return oldVal;
+  },
+
+  valueOf() {
+    const oldVal = this.val;
+    this.val = '';
+    return oldVal;
+  },
+}; */
 
 
 module.exports = {

@@ -27,10 +27,18 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  if (num % 15 === 0) {
+    return 'FizzBuzz';
+  }
+  if (num % 3 === 0) {
+    return 'Fizz';
+  }
+  if (num % 5 === 0) {
+    return 'Buzz';
+  }
+  return num;
 }
-
 
 /**
  * Returns the factorial of the specified integer n.
@@ -43,8 +51,13 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let result = 1;
+
+  for (let i = 1; i <= n; i += 1) {
+    result *= i;
+  }
+  return result;
 }
 
 
@@ -60,8 +73,16 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  if (n1 > n2) {
+    return undefined;
+  }
+
+  let result = 0;
+  for (let i = n1; i <= n2; i += 1) {
+    result += i;
+  }
+  return result;
 }
 
 
@@ -80,8 +101,11 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  if ((a >= b + c) || (b >= a + c) || (c >= a + b)) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -208,8 +232,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -225,8 +249,8 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return num.toString().split('').reverse().join('');
 }
 
 
@@ -268,8 +292,20 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let digitalRoot = num;
+
+  while (digitalRoot > 9) {
+    let restRootPart = digitalRoot;
+    digitalRoot = 0;
+
+    while (restRootPart > 0) {
+      const modulo = restRootPart % 10;
+      restRootPart = Math.floor(restRootPart / 10);
+      digitalRoot += modulo;
+    }
+  }
+  return digitalRoot;
 }
 
 
@@ -294,8 +330,46 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const BRACKETS_MAP = new Map([
+    ['[', ']'],
+    ['{', '}'],
+    ['(', ')'],
+    ['<', '>'],
+  ]);
+
+  function isClosingBracket(char) {
+    const bracketsValues = Array.from(BRACKETS_MAP.values());
+    return bracketsValues.includes(char);
+  }
+
+  function isOpeningBracket(char) {
+    return BRACKETS_MAP.has(char);
+  }
+
+  function isBracketsMatch(opening, closing) {
+    return BRACKETS_MAP.get(opening) === closing;
+  }
+
+  const stack = [];
+
+  for (let i = 0; i < str.length; i += 1) {
+    const currentChar = str[i];
+
+    if (isClosingBracket(currentChar)) {
+      const lastOpeningBracket = stack.pop();
+
+      if (!isBracketsMatch(lastOpeningBracket, currentChar)) {
+        return false;
+      }
+    }
+
+    if (isOpeningBracket(currentChar)) {
+      stack.push(currentChar);
+    }
+  }
+
+  return (stack.length === 0);
 }
 
 
@@ -338,6 +412,24 @@ function toNaryString(/* num, n */) {
  */
 function getCommonDirectoryPath(/* pathes */) {
   throw new Error('Not implemented');
+  /* if(pathes.length === 0) {
+    return undefined;
+  }
+
+  let curIndex = 0;
+  let curSubstr = '';
+
+  while (true) {
+    curSubstr += pathes[0][curIndex];
+
+    for (let i = 1; i < pathes.length; i += 0) {
+      if(pathes[i][curIndex] !== curSubstr) {
+        brea
+      }
+    }
+  }
+
+  return curSubstr; */
 }
 
 
