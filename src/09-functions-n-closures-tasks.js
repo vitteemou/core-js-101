@@ -68,9 +68,7 @@ function getPolynom(...coeffsArray) {
 
   const n = coeffsArray.length - 1;
 
-  return function (x) {
-    return coeffsArray.reduce((acc, curCoeff, index) => acc + curCoeff * x ** (n - index), 0);
-  };
+  return (x) => coeffsArray.reduce((acc, curCoeff, index) => acc + curCoeff * x ** (n - index), 0);
 }
 
 
